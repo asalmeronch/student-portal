@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { ResumesIndex } from "./ResumesIndex";
+import { ResumeShow } from "./ResumeShow";
 import { Modal } from "./Modal";
 
 export function Content() {
@@ -10,6 +11,9 @@ export function Content() {
     { id: 2, name: "Second", url: "https://via.placeholder.com/300", width: 300, height: 300 },
   ];
 
+  const [isResumesShowVisible, setIsResumesShowVisible] = useState(false);
+  const [currentResume, setCurrentResume] = useState({});
+
   const handleIndexResumes = () => {
     console.log("handleIndexResumes");
     axios.get("http://localhost:3000/resumes.json").then((response) => {
@@ -18,21 +22,24 @@ export function Content() {
     });
   };
 
-  const handleCreateResume = (params, successCallback) => {
-    console.log("handleCreateResume", params);
-    axios.post("http://localhost:3000/resumes.json", params).then((response) => {
-      setResumes([...resumes, response.data]);
-      successCallback();
-    });
+  const handleShowResume = (resume) => {
+    console.log("handleShowResume", resume);
+    setIsResumesShowVisible(true);
+    setCurrentResume(resume);
+  };
+
+  const handleClose = () => {
+    console.log("handleClose");
+    setIsResumesShowVisible(false);
   };
 
   useEffect(handleIndexResumes, []);
 
   return (
     <div>
-      <ResumesIndex resumes={resumes} />
-      <Modal show={true}>
-        <h1>Test</h1>
+      <ResumesIndex resumes={resumes} onShowResume={handleShowResume} />
+      <Modal show={isResumesShowVisible} onClose={handleClose}>
+        <ResumeShow resume={currentResume} />
       </Modal>
     </div>
   );
