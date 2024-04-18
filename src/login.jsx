@@ -24,7 +24,7 @@ export function Login() {
       })
       .catch((error) => {
         console.log(error.response);
-        setErrors(["Invalid email or password"]);
+        setErrors(["Invalid email or password"]); //Comment here
       });
   };
 
