@@ -1,45 +1,40 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { ResumesIndex } from "./ResumesIndex";
-import { ResumeShow } from "./ResumeShow";
+import { StudentsIndex } from "./StudentsIndex";
+import { StudentShow } from "./StudentShow";
 import { Modal } from "./Modal";
 
 export function Content() {
-  // const [resumes, setResumes] = useState([]);
-  const resumes = [
-    { id: 1, name: "First", url: "https://via.placeholder.com/150", width: 150, height: 150 },
-    { id: 2, name: "Second", url: "https://via.placeholder.com/300", width: 300, height: 300 },
-  ];
+  const [students, setStudents] = useState([]);
+  const [isStudentsShowVisible, setIsStudentsShowVisible] = useState(false);
+  const [currentStudent, setCurrentStudent] = useState({});
 
-  const [isResumesShowVisible, setIsResumesShowVisible] = useState(false);
-  const [currentResume, setCurrentResume] = useState({});
-
-  const handleIndexResumes = () => {
-    console.log("handleIndexResumes");
-    axios.get("http://localhost:3000/resumes.json").then((response) => {
+  const handleIndexStudents = () => {
+    console.log("handleIndexStudents");
+    axios.get("http://localhost:3000/students.json").then((response) => {
       console.log(response.data);
-      setResumes(response.data);
+      setStudents(response.data);
     });
   };
 
-  const handleShowResume = (resume) => {
-    console.log("handleShowResume", resume);
-    setIsResumesShowVisible(true);
-    setCurrentResume(resume);
+  const handleShowStudent = (student) => {
+    console.log("handleShowStudent", student);
+    setIsStudentsShowVisible(true);
+    setCurrentStudent(student);
   };
 
   const handleClose = () => {
     console.log("handleClose");
-    setIsResumesShowVisible(false);
+    setIsStudentsShowVisible(false);
   };
 
-  useEffect(handleIndexResumes, []);
+  useEffect(handleIndexStudents, []);
 
   return (
     <div>
-      <ResumesIndex resumes={resumes} onShowResume={handleShowResume} />
-      <Modal show={isResumesShowVisible} onClose={handleClose}>
-        <ResumeShow resume={currentResume} />
+      <StudentsIndex students={students} onShowStudent={handleShowStudent} />
+      <Modal show={isStudentsShowVisible} onClose={handleClose}>
+        <StudentShow student={currentStudent} />
       </Modal>
     </div>
   );
