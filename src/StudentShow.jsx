@@ -14,7 +14,7 @@ export function StudentShow(props) {
         <input defaultValue={props.student.resume_url} name="resume_url" type="URL" />
       </div>
       <form onSubmit={handleSubmit}></form>
-      <button type="submit">Update photo</button>
+      <button type="submit">Update</button>
     </div>
   );
 }
