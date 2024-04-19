@@ -9,6 +9,10 @@ export function StudentShow(props) {
     <div>
       <h1>Resume information</h1>
       <p>{props.student.resume_url}</p>
+      <div>
+        Resume URL:
+        <input defaultValue={props.student.resume_url} name="resume_url" type="URL" />
+      </div>
       <form onSubmit={handleSubmit}></form>
     </div>
   );
