@@ -23,6 +23,23 @@ export function Content() {
     setCurrentStudent(student);
   };
 
+  const handleUpdateStudent = (id, params, successCallback) => {
+    console.log("handleUpdateStudent", params);
+    axios.patch(`http://localhost:3000/student/${id}.json`, params).then((response) => {
+      setStudents(
+        students.map((student) => {
+          if (student.id === response.data.id) {
+            return response.data;
+          } else {
+            return student;
+          }
+        })
+      );
+      successCallback();
+      handleClose();
+    });
+  };
+
   const handleClose = () => {
     console.log("handleClose");
     setIsStudentsShowVisible(false);
@@ -34,7 +51,7 @@ export function Content() {
     <div>
       <StudentsIndex students={students} onShowStudent={handleShowStudent} />
       <Modal show={isStudentsShowVisible} onClose={handleClose}>
-        <StudentShow student={currentStudent} />
+        <StudentShow student={currentStudent} onUpdateStudent={handleUpdateStudent} />
       </Modal>
     </div>
   );
