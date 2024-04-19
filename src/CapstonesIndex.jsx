@@ -8,6 +8,7 @@ export function CapstonesIndex(props) {
           <img src={capstone.url} />
           <p>Width: {capstone.width}</p>
           <p>Height: {capstone.height}</p>
+          <button onClick={() => props.onShowCapstone(capstone)}>More info</button>
         </div>
       ))}
     </div>

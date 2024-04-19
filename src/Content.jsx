@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { StudentsIndex } from "./StudentsIndex";
 import { CapstonesIndex } from "./CapstonesIndex";
 import { StudentShow } from "./StudentShow";
+import { CapstonesShow } from "./CapstonesShow";
 import { Modal } from "./Modal";
 
 export function Content() {
@@ -12,6 +13,8 @@ export function Content() {
     { id: 2, name: "Second", url: "https://via.placeholder.com/300", width: 300, height: 300 },
   ];
   // const [capstones, setCapstones] = useState([]);
+  const [isCapstonesShowVisible, setIsCapstonesShowVisible] = useState(false);
+  const [currentCapstone, setCurrentCapstone] = useState({});
   const [isStudentsShowVisible, setIsStudentsShowVisible] = useState(false);
   const [currentStudent, setCurrentStudent] = useState({});
 
@@ -37,9 +40,20 @@ export function Content() {
     setCurrentStudent(student);
   };
 
+  const handleShowCapstone = (capstone) => {
+    console.log("handleShowCapstone", capstone);
+    setIsCapstonesShowVisible(true);
+    setCurrentCapstone(capstone);
+  };
+
   const handleClose = () => {
     console.log("handleClose");
     setIsStudentsShowVisible(false);
+  };
+
+  const handleCapstoneClose = () => {
+    console.log("handleClose");
+    setIsCapstonesShowVisible(false);
   };
 
   useEffect(handleIndexStudents, []);
@@ -48,9 +62,12 @@ export function Content() {
   return (
     <div>
       <StudentsIndex students={students} onShowStudent={handleShowStudent} />
-      <CapstonesIndex capstones={capstones} />
       <Modal show={isStudentsShowVisible} onClose={handleClose}>
         <StudentShow student={currentStudent} />
+      </Modal>
+      <CapstonesIndex capstones={capstones} onShowCapstone={handleShowCapstone} />
+      <Modal show={isCapstonesShowVisible} onClose={handleCapstoneClose}>
+        <CapstonesShow capstone={currentCapstone} />
       </Modal>
     </div>
   );
