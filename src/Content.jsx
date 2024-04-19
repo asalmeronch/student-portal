@@ -81,10 +81,11 @@ export function Content() {
   // useEffect(handleIndexCapstones, []);
 
   return (
-    <div>
+    <div className="container">
       <Routes>
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/students" element={<StudentsIndex students={students} />} />
       </Routes>
 
       <StudentsIndex students={students} onShowStudent={handleShowStudent} />
