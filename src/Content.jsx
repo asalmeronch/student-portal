@@ -63,6 +63,23 @@ export function Content() {
     setCurrentCapstone(capstone);
   };
 
+  const handleUpdateCapstone = (id, params, successCallback) => {
+    console.log("handleUpdateCapstone", params);
+    axios.patch(`http:localhost:3000/capstones/${id}.json`, params).then((response) => {
+      setCapstones(
+        capstones.map((capstone) => {
+          if (capstone.id === response.data.id) {
+            return response.data;
+          } else {
+            return capstone;
+          }
+        })
+      );
+      successCallback();
+      handleClose();
+    });
+  };
+
   const handleClose = () => {
     console.log("handleClose");
     setIsStudentsShowVisible(false);
@@ -90,7 +107,7 @@ export function Content() {
       </Modal>
       <CapstonesIndex capstones={capstones} onShowCapstone={handleShowCapstone} />
       <Modal show={isCapstonesShowVisible} onClose={handleCapstoneClose}>
-        <CapstonesShow capstone={currentCapstone} />
+        <CapstonesShow capstone={currentCapstone} onUpdateCapstone={handleUpdateCapstone} />
       </Modal>
     </div>
   );
