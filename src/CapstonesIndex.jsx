@@ -5,9 +5,9 @@ export function CapstonesIndex(props) {
       {props.capstones.map((capstone) => (
         <div key={capstone.id}>
           <h2>{capstone.name}</h2>
-          <img src={capstone.url} />
-          <p>Width: {capstone.width}</p>
-          <p>Height: {capstone.height}</p>
+          <p>Description: {capstone.description}</p>
+          <p>URL: {capstone.url}</p>
+          <img src={capstone.screenshot} />
           <button onClick={() => props.onShowCapstone(capstone)}>More info</button>
         </div>
       ))}

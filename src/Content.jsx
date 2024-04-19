@@ -12,11 +12,7 @@ import { Routes, Route } from "react-router-dom";
 
 export function Content() {
   const [students, setStudents] = useState([]);
-  const capstones = [
-    { id: 1, name: "First", url: "https://via.placeholder.com/150", width: 150, height: 150 },
-    { id: 2, name: "Second", url: "https://via.placeholder.com/300", width: 300, height: 300 },
-  ];
-  // const [capstones, setCapstones] = useState([]);
+  const [capstones, setCapstones] = useState([]);
   const [isCapstonesShowVisible, setIsCapstonesShowVisible] = useState(false);
   const [currentCapstone, setCurrentCapstone] = useState({});
   const [isStudentsShowVisible, setIsStudentsShowVisible] = useState(false);
@@ -30,13 +26,13 @@ export function Content() {
     });
   };
 
-  // const handleIndexCapstones = () => {
-  //   console.log("handleIndexCapstones");
-  //   axios.get("http://localhost:3000/capstones.json").then((response) => {
-  //     console.log(response.data);
-  //     setCapstones(response.data);
-  //   });
-  // };
+  const handleIndexCapstones = () => {
+    console.log("handleIndexCapstones");
+    axios.get("http://localhost:3000/capstones.json").then((response) => {
+      console.log(response.data);
+      setCapstones(response.data);
+    });
+  };
 
   const handleShowStudent = (student) => {
     console.log("handleShowStudent", student);
@@ -78,7 +74,7 @@ export function Content() {
   };
 
   useEffect(handleIndexStudents, []);
-  // useEffect(handleIndexCapstones, []);
+  useEffect(handleIndexCapstones, []);
 
   return (
     <div className="container">
