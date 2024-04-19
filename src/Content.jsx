@@ -5,6 +5,10 @@ import { CapstonesIndex } from "./CapstonesIndex";
 import { StudentShow } from "./StudentShow";
 import { CapstonesShow } from "./CapstonesShow";
 import { Modal } from "./Modal";
+import { Login } from "./login";
+
+import { Signup } from "./Signup";
+import { Routes, Route } from "react-router-dom";
 
 export function Content() {
   const [students, setStudents] = useState([]);
@@ -61,6 +65,11 @@ export function Content() {
 
   return (
     <div>
+      <Routes>
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+
       <StudentsIndex students={students} onShowStudent={handleShowStudent} />
       <Modal show={isStudentsShowVisible} onClose={handleClose}>
         <StudentShow student={currentStudent} />

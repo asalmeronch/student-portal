@@ -3,9 +3,13 @@ html {
 }
 
 body {
+  min-height: 100vh;
   margin: 0;
   font-family: system-ui;
-  background: url("https://www.toptal.com/designers/subtlepatterns/uploads/paisley.png");
+  background: white;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 header {
@@ -31,6 +35,11 @@ footer {
   padding: 2em;
   margin-top: 1em;
   text-align: center;
+  
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;
 }
 
 main {
@@ -39,7 +48,7 @@ main {
   margin: 0 auto;
 }
 
-.cards {
+/* .cards {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 50px;
@@ -49,7 +58,7 @@ main {
   width: 100%;
   height: 300px;
   object-fit: cover;
-}
+} */
 
 button {
   padding: 1em;
